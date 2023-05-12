@@ -1,7 +1,7 @@
 import ErrorHandler from "../middlewares/error.js";
 import { Task } from "../models/task.js";
 import jwt from "jsonwebtoken";
-import sendTrue from "../utils/sendJson.js";
+import sendTrue from "../utils/sendTrueJson.js";
 
 export const addTask = async (req, res, next) => {
     try {

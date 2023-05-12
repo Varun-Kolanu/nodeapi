@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { sendCookie } from "../utils/sendCookie.js";
 import jwt from "jsonwebtoken";
 import ErrorHandler from "../middlewares/error.js";
-import sendTrue from "../utils/sendJson.js";
+import sendTrue from "../utils/sendTrueJson.js";
 
 export const register = async (req, res, next) => {
     try {
@@ -34,7 +34,9 @@ export const login = async (req, res, next) => {
 export const logout = async (req, res, next) => {
     try {
         res.cookie("token", null, {
-            expires: new Date(Date.now())
+            expires: new Date(Date.now()),
+            sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
+            secure: process.env.NODE_ENV === "Development" ? false : true
         })
         sendTrue(res, "Logged out successfully");
     } catch (error) {
@@ -47,7 +49,7 @@ export const myInfo = async (req, res) => {
         res.status(200)
             .json({
                 success: true,
-                user: req.user
+                user: req.user,
             })
     } catch (error) {
         next(error);

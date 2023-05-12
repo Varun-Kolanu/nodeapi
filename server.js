@@ -3,4 +3,4 @@ import { connectDB } from "./data/datbase.js";
 
 connectDB();
 
-app.listen(process.env.PORT,() => console.log(`listening on http://localhost:${process.env.PORT}`));
+app.listen(process.env.PORT,() => console.log(`listening on http://localhost:${process.env.PORT} in ${process.env.NODE_ENV} mode`));
